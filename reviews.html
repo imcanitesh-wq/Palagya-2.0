@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Reviews — Hotel Palagya | Tilganga, Kathmandu</title>
+    <meta name="description" content="Read what guests say about Hotel Palagya. 5 minutes from Pashupatinath Temple. Authentic reviews from pilgrims, families, and travelers from around the world.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #F7F1E8;
+            --terracotta: #B8543A;
+            --maroon: #5C1F1B;
+            --gold: #C9A961;
+            --charcoal: #1A1410;
+            --cream-dark: #EDE4D3;
+            --gold-light: #D4B978;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --max-width: 1400px;
+            --nav-height: 80px;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 8rem;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+        ::selection { background: var(--terracotta); color: var(--cream); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+        /* NAV */
+        .site-nav {
+            position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 var(--space-md); max-width: var(--max-width); margin: 0 auto;
+            transition: background 0.6s var(--ease-out-expo), backdrop-filter 0.6s;
+        }
+        .site-nav.scrolled {
+            background: rgba(247, 241, 232, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        }
+        .site-nav.scrolled .nav-logo, .site-nav.scrolled .nav-links a { color: var(--charcoal); }
+        .site-nav.scrolled .nav-cta { border-color: var(--terracotta); color: var(--terracotta); }
+        .site-nav.scrolled .mobile-menu-btn { color: var(--charcoal); }
+        .nav-logo {
+            font-family: 'Fraunces', Georgia, serif; font-size: 1.4rem; font-weight: 500; color: var(--charcoal);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .nav-logo .logo-icon {
+            width: 32px; height: 32px; border: 2px solid currentColor; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 0.7rem;
+        }
+        .nav-links { display: flex; gap: var(--space-md); list-style: none; }
+        .nav-links a {
+            font-family: 'Lora', Georgia, serif; font-size: 0.85rem; color: var(--charcoal);
+            letter-spacing: 0.05em; position: relative; padding: 0.25rem 0;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--gold); transition: width 0.4s var(--ease-out-expo);
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--terracotta); }
+        .nav-links a.active::after { width: 100%; background: var(--terracotta); }
+        .nav-cta {
+            padding: 0.6rem 1.5rem; border: 1px solid var(--terracotta); color: var(--terracotta);
+            font-family: 'Lora', Georgia, serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+        .nav-cta:hover { background: var(--terracotta); border-color: var(--terracotta); color: var(--cream); }
+        .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--charcoal); }
+
+        .mobile-menu {
+            position: fixed; inset: 0; background: var(--charcoal); z-index: 999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: var(--space-md); opacity: 0; visibility: hidden;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+        .mobile-menu.open { opacity: 1; visibility: visible; }
+        .mobile-menu a { font-family: 'Fraunces', Georgia, serif; font-size: 1.5rem; color: var(--cream); }
+        .mobile-menu-close { position: absolute; top: var(--space-md); right: var(--space-md); background: none; border: none; color: var(--cream); font-size: 1.5rem; cursor: pointer; }
+
+        /* PAGE HERO */
+        .page-hero {
+            position: relative; height: 55vh; min-height: 400px; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1544148103-0773bf10d330?w=1920&q=80') center/cover no-repeat;
+        }
+        .page-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(26,20,16,0.5) 0%, rgba(92,31,27,0.75) 100%);
+        }
+        .page-hero-content { position: relative; z-index: 2; text-align: center; color: var(--cream); max-width: 800px; padding: 0 var(--space-md); }
+        .page-hero-devanagari {
+            font-family: 'Fraunces', Georgia, serif; font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: var(--gold); letter-spacing: 0.4em; margin-bottom: var(--space-sm);
+        }
+        .page-hero-title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; line-height: 1.1; margin-bottom: var(--space-sm); }
+        .page-hero-title .italic { font-style: italic; font-weight: 300; color: var(--gold-light); }
+        .page-hero-subtitle { font-family: 'Lora', Georgia, serif; font-size: 1.1rem; color: rgba(247,241,232,0.8); max-width: 500px; margin: 0 auto; }
+
+        /* PATTERN */
+        .pattern-divider { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); padding: var(--space-md) 0; }
+        .pattern-divider .line { flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+        .pattern-divider .ornament { font-family: 'Fraunces', Georgia, serif; font-size: 1.5rem; color: var(--gold); opacity: 0.6; }
+
+        /* RATINGS SUMMARY */
+        .ratings-section { padding: var(--space-xl) var(--space-md); max-width: var(--max-width); margin: 0 auto; }
+        .ratings-grid {
+            display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-lg); align-items: start;
+        }
+        .rating-big {
+            text-align: center; padding: var(--space-lg);
+            background: var(--charcoal); color: var(--cream);
+        }
+        .rating-big .score {
+            font-family: 'Fraunces', Georgia, serif; font-size: 5rem; color: var(--gold);
+            line-height: 1; margin-bottom: var(--space-xs);
+        }
+        .rating-big .outof { font-size: 0.9rem; color: rgba(247,241,232,0.6); margin-bottom: var(--space-sm); }
+        .rating-big .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.2em; margin-bottom: var(--space-sm); }
+        .rating-big .count { font-size: 0.85rem; color: rgba(247,241,232,0.5); }
+
+        .rating-breakdown { padding: var(--space-md) 0; }
+        .rating-bar {
+            display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);
+        }
+        .rating-bar label {
+            font-family: 'Lora', Georgia, serif; font-size: 0.85rem;
+            color: rgba(26,20,16,0.7); min-width: 100px;
+        }
+        .rating-bar .bar-bg {
+            flex: 1; height: 6px; background: var(--cream-dark); border-radius: 3px; overflow: hidden;
+        }
+        .rating-bar .bar-fill {
+            height: 100%; background: var(--gold); border-radius: 3px;
+            transition: width 1s var(--ease-out-expo);
+        }
+        .rating-bar .value {
+            font-family: 'Fraunces', Georgia, serif; font-size: 0.9rem;
+            color: var(--charcoal); min-width: 30px; text-align: right;
+        }
+
+        /* REVIEWS GRID */
+        .reviews-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md);
+        }
+        .review-card {
+            background: var(--cream); border: 1px solid rgba(201,169,97,0.15);
+            padding: var(--space-md); transition: all 0.4s var(--ease-out-expo);
+        }
+        .review-card:hover {
+            transform: translateY(-6px); box-shadow: 0 15px 40px rgba(26,20,16,0.08);
+            border-color: rgba(201,169,97,0.3);
+        }
+        .review-header {
+            display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);
+        }
+        .review-avatar {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--terracotta); display: flex; align-items: center; justify-content: center;
+            font-family: 'Fraunces', Georgia, serif; font-size: 1rem; color: var(--cream);
+            flex-shrink: 0;
+        }
+        .review-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .review-meta h4 {
+            font-family: 'Fraunces', Georgia, serif; font-size: 1rem; color: var(--charcoal);
+            font-weight: 500; margin-bottom: 0.1rem;
+        }
+        .review-meta .location {
+            font-family: 'Lora', Georgia, serif; font-size: 0.8rem; color: var(--terracotta);
+        }
+        .review-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: var(--space-sm); }
+        .review-text {
+            font-family: 'Lora', Georgia, serif; font-size: 0.95rem;
+            color: rgba(26,20,16,0.75); line-height: 1.7; font-style: italic;
+            margin-bottom: var(--space-sm);
+        }
+        .review-room {
+            font-family: 'Lora', Georgia, serif; font-size: 0.8rem;
+            color: var(--gold); letter-spacing: 0.05em;
+        }
+        .review-date {
+            font-family: 'Lora', Georgia, serif; font-size: 0.75rem;
+            color: rgba(26,20,16,0.4); margin-top: var(--space-xs);
+        }
+
+        /* FEATURED REVIEW */
+        .featured-review {
+            background: var(--charcoal); color: var(--cream);
+            padding: var(--space-lg); position: relative; overflow: hidden;
+        }
+        .featured-review::before {
+            content: '"'; position: absolute; top: var(--space-sm); left: var(--space-md);
+            font-family: 'Fraunces', Georgia, serif; font-size: 8rem;
+            color: var(--gold); opacity: 0.1; line-height: 1;
+        }
+        .featured-review-content { position: relative; z-index: 1; }
+        .featured-review-text {
+            font-family: 'Fraunces', Georgia, serif; font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-style: italic; font-weight: 300; line-height: 1.5;
+            color: rgba(247,241,232,0.9); margin-bottom: var(--space-md);
+        }
+        .featured-review-author {
+            display: flex; align-items: center; gap: var(--space-sm);
+        }
+        .featured-review-author .avatar {
+            width: 56px; height: 56px; border-radius: 50%; border: 2px solid var(--gold);
+            overflow: hidden;
+        }
+        .featured-review-author .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .featured-review-author h4 {
+            font-family: 'Fraunces', Georgia, serif; font-size: 1.1rem; color: var(--cream);
+        }
+        .featured-review-author span {
+            font-family: 'Lora', Georgia, serif; font-size: 0.85rem; color: var(--gold);
+        }
+
+        /* OTA SECTION */
+        .ota-section { background: var(--cream-dark); }
+        .ota-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md);
+        }
+        .ota-card {
+            background: var(--cream); border: 1px solid rgba(201,169,97,0.15);
+            padding: var(--space-md); text-align: center;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+        .ota-card:hover {
+            transform: translateY(-4px); box-shadow: 0 10px 30px rgba(26,20,16,0.08);
+            border-color: rgba(201,169,97,0.3);
+        }
+        .ota-card .logo {
+            font-family: 'Fraunces', Georgia, serif; font-size: 1.2rem;
+            color: var(--charcoal); margin-bottom: var(--space-xs);
+        }
+        .ota-card .score {
+            font-family: 'Fraunces', Georgia, serif; font-size: 2rem; color: var(--terracotta);
+            line-height: 1;
+        }
+        .ota-card .outof { font-size: 0.8rem; color: rgba(26,20,16,0.5); }
+        .ota-card .reviews-count {
+            font-family: 'Lora', Georgia, serif; font-size: 0.8rem;
+            color: rgba(26,20,16,0.6); margin-top: var(--space-xs);
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--maroon); position: relative; overflow: hidden;
+            padding: var(--space-xl) var(--space-md); text-align: center;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=1200&q=80') center/cover no-repeat;
+            opacity: 0.1;
+        }
+        .cta-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .cta-section h2 {
+            font-family: 'Fraunces', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400; color: var(--cream); line-height: 1.2; margin-bottom: var(--space-sm);
+        }
+        .cta-section h2 .italic { font-style: italic; font-weight: 300; color: var(--gold-light); }
+        .cta-section p { font-family: 'Lora', Georgia, serif; font-size: 1.1rem; color: rgba(247,241,232,0.8); margin-bottom: var(--space-md); }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 1rem 2.5rem; background: var(--terracotta); color: var(--cream);
+            font-family: 'Lora', Georgia, serif; font-size: 0.85rem; letter-spacing: 0.15em;
+            text-transform: uppercase; border: none; cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo); position: relative; overflow: hidden;
+        }
+        .btn-primary::before {
+            content: ''; position: absolute; inset: 0; background: var(--maroon);
+            transform: translateX(-100%); transition: transform 0.5s var(--ease-out-expo);
+        }
+        .btn-primary:hover::before { transform: translateX(0); }
+        .btn-primary span { position: relative; z-index: 1; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(184,84,58,0.3); }
+
+        /* FOOTER */
+        .site-footer {
+            background: var(--charcoal); color: var(--cream);
+            padding: var(--space-xl) var(--space-md) var(--space-md); position: relative;
+        }
+        .footer-pattern { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--terracotta), var(--gold), var(--terracotta)); }
+        .footer-grid { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: var(--space-lg); margin-bottom: var(--space-lg); }
+        .footer-brand .footer-logo { font-family: 'Fraunces', Georgia, serif; font-size: 1.8rem; color: var(--cream); margin-bottom: var(--space-sm); }
+        .footer-brand .footer-tagline { font-family: 'Lora', Georgia, serif; font-size: 0.95rem; color: rgba(247,241,232,0.7); line-height: 1.7; margin-bottom: var(--space-sm); }
+        .footer-brand .footer-meaning { font-family: 'Fraunces', Georgia, serif; font-size: 0.85rem; color: var(--gold); font-style: italic; }
+        .footer-column h4 { font-family: 'Fraunces', Georgia, serif; font-size: 0.9rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: var(--space-sm); }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 0.6rem; }
+        .footer-column ul li a { font-family: 'Lora', Georgia, serif; font-size: 0.9rem; color: rgba(247,241,232,0.7); transition: color 0.3s; }
+        .footer-column ul li a:hover { color: var(--gold); }
+        .footer-contact p { font-family: 'Lora', Georgia, serif; font-size: 0.9rem; color: rgba(247,241,232,0.7); margin-bottom: 0.5rem; }
+        .footer-contact a { color: var(--gold); transition: color 0.3s; }
+        .footer-contact a:hover { color: var(--cream); }
+        .footer-ota { display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-top: var(--space-sm); }
+        .footer-ota a { padding: 0.3rem 0.8rem; border: 1px solid rgba(201,169,97,0.3); font-size: 0.75rem; letter-spacing: 0.05em; color: rgba(247,241,232,0.6); transition: all 0.3s; }
+        .footer-ota a:hover { border-color: var(--gold); color: var(--gold); }
+        .footer-bottom { max-width: var(--max-width); margin: 0 auto; border-top: 1px solid rgba(247,241,232,0.1); padding-top: var(--space-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-sm); }
+        .footer-bottom p { font-family: 'Lora', Georgia, serif; font-size: 0.8rem; color: rgba(247,241,232,0.5); }
+        .kathmandu-clock { display: flex; align-items: center; gap: 0.5rem; font-family: 'Fraunces', Georgia, serif; font-size: 0.85rem; color: var(--gold); }
+        .kathmandu-clock svg { width: 16px; height: 16px; }
+
+        /* ANIMATIONS */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        @media (max-width: 1024px) {
+            .ratings-grid { grid-template-columns: 1fr; }
+            .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+            .ota-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta { display: none; }
+            .mobile-menu-btn { display: block; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .ota-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="rooms.html">Rooms</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="contact.html">Contact</a>
+        <a href="reservation.html" style="color: var(--gold);">Book Now</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="site-nav scrolled" id="siteNav">
+        <a href="index.html" class="nav-logo">
+            <span class="logo-icon">पा</span>
+            <span>Palagya</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="rooms.html">Rooms</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="reviews.html" class="active">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="reservation.html" class="nav-cta">Book a Stay</a>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <div class="page-hero-devanagari">समीक्षाहरू</div>
+            <h1 class="page-hero-title">Guest <span class="italic">Voices</span></h1>
+            <p class="page-hero-subtitle">What travelers say after crossing the threshold into Palagya.</p>
+        </div>
+    </section>
+
+    <!-- Pattern Divider -->
+    <div class="pattern-divider">
+        <div class="line"></div>
+        <div class="ornament">❋</div>
+        <div class="line"></div>
+    </div>
+
+    <!-- Ratings Summary -->
+    <section class="ratings-section">
+        <div class="ratings-grid reveal">
+            <div class="rating-big">
+                <div class="score">4.7</div>
+                <div class="outof">out of 5</div>
+                <div class="stars">★★★★★</div>
+                <div class="count">Based on 127 verified guest reviews</div>
+            </div>
+            <div class="rating-breakdown">
+                <div class="rating-bar">
+                    <label>Cleanliness</label>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 92%"></div></div>
+                    <div class="value">4.6</div>
+                </div>
+                <div class="rating-bar">
+                    <label>Comfort</label>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 90%"></div></div>
+                    <div class="value">4.5</div>
+                </div>
+                <div class="rating-bar">
+                    <label>Location</label>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 98%"></div></div>
+                    <div class="value">4.9</div>
+                </div>
+                <div class="rating-bar">
+                    <label>Service</label>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 94%"></div></div>
+                    <div class="value">4.7</div>
+                </div>
+                <div class="rating-bar">
+                    <label>Value</label>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 96%"></div></div>
+                    <div class="value">4.8</div>
+                </div>
+                <div class="rating-bar">
+                    <label>Breakfast</label>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 88%"></div></div>
+                    <div class="value">4.4</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pattern Divider -->
+    <div class="pattern-divider">
+        <div class="line"></div>
+        <div class="ornament">❋</div>
+        <div class="line"></div>
+    </div>
+
+    <!-- Featured Review -->
+    <section class="section" style="max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-md) var(--space-xl);">
+        <div class="featured-review reveal">
+            <div class="featured-review-content">
+                <p class="featured-review-text">
+                    We held our daughter's wedding reception in the banquet hall. The staff treated every guest like family. Pala + Agya — they truly live the meaning of their name. From the moment we arrived to the final farewell, every detail was handled with devotion.
+                </p>
+                <div class="featured-review-author">
+                    <div class="avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Pramila KC">
+                    </div>
+                    <div>
+                        <h4>Pramila KC</h4>
+                        <span>Kathmandu, Nepal • Wedding Reception</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Grid -->
+    <section class="section" style="max-width: var(--max-width); margin: 0 auto;">
+        <div class="section-header reveal" style="text-align: center; margin-bottom: var(--space-lg);">
+            <div style="font-family: 'Fraunces', Georgia, serif; font-size: 0.85rem; color: var(--terracotta); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: var(--space-xs);">Recent Reviews</div>
+            <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; color: var(--charcoal);">
+                From the <span style="font-style: italic; font-weight: 300; color: var(--terracotta);">Threshold</span>
+            </h2>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card reveal">
+                <div class="review-header">
+                    <div class="review-avatar">RS</div>
+                    <div class="review-meta">
+                        <h4>Ravi Sharma</h4>
+                        <div class="location">Mumbai, India</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">The morning walk to Pashupatinath before the crowds arrive is something no travel guide can prepare you for. Palagya makes that possible every single day.</p>
+                <div class="review-room">Stayed in: Deluxe Room</div>
+                <div class="review-date">March 2025</div>
+            </div>
+
+            <div class="review-card reveal reveal-delay-1">
+                <div class="review-header">
+                    <div class="review-avatar">EM</div>
+                    <div class="review-meta">
+                        <h4>Elena Müller</h4>
+                        <div class="location">Berlin, Germany</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">After three weeks trekking in the Himalayas, arriving at Palagya felt like coming home. The rooftop restaurant became our evening ritual.</p>
+                <div class="review-room">Stayed in: Standard Room</div>
+                <div class="review-date">February 2025</div>
+            </div>
+
+            <div class="review-card reveal reveal-delay-2">
+                <div class="review-header">
+                    <div class="review-avatar">JP</div>
+                    <div class="review-meta">
+                        <h4>James Peterson</h4>
+                        <div class="location">London, UK</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★☆</div>
+                <p class="review-text">Business trip made pleasant. The airport proximity saved me hours of Kathmandu traffic. Conference room was well-equipped and the staff understood my schedule.</p>
+                <div class="review-room">Stayed in: Deluxe Room</div>
+                <div class="review-date">January 2025</div>
+            </div>
+
+            <div class="review-card reveal">
+                <div class="review-header">
+                    <div class="review-avatar">SK</div>
+                    <div class="review-meta">
+                        <h4>Sunita Khadka</h4>
+                        <div class="location">Pokhara, Nepal</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">Brought my parents for their anniversary. The Special Priest Room was perfect for their daily temple visits. Staff arranged a private aarti viewing — unforgettable.</p>
+                <div class="review-room">Stayed in: Special Priest Room</div>
+                <div class="review-date">January 2025</div>
+            </div>
+
+            <div class="review-card reveal reveal-delay-1">
+                <div class="review-header">
+                    <div class="review-avatar">AL</div>
+                    <div class="review-meta">
+                        <h4>Amanda Liu</h4>
+                        <div class="location">Singapore</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">Family of four, two kids under 10. The Family Room was spacious, clean, and the rooftop became our kids' favorite spot. Value for money is exceptional.</p>
+                <div class="review-room">Stayed in: Family Room</div>
+                <div class="review-date">December 2024</div>
+            </div>
+
+            <div class="review-card reveal reveal-delay-2">
+                <div class="review-header">
+                    <div class="review-avatar">DK</div>
+                    <div class="review-meta">
+                        <h4>Dr. Deepak Kumar</h4>
+                        <div class="location">Delhi, India</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">As a physician attending a conference at the hospital nearby, I needed quiet and proximity. Palagya delivered both. The hot water was reliable, the bed comfortable, the Wi-Fi fast.</p>
+                <div class="review-room">Stayed in: Standard</div>
+                <div class="review-date">December 2024</div>
+            </div>
+
+            <div class="review-card reveal">
+                <div class="review-header">
+                    <div class="review-avatar">TY</div>
+                    <div class="review-meta">
+                        <h4>Takashi Yamamoto</h4>
+                        <div class="location">Tokyo, Japan</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">I came for the temple, I stayed for the hospitality. The eSewa payment was convenient, the staff patient with my limited English, and the Newari cuisine on the rooftop was the best in Kathmandu.</p>
+                <div class="review-room">Stayed in: Deluxe Family</div>
+                <div class="review-date">November 2024</div>
+            </div>
+
+            <div class="review-card reveal reveal-delay-1">
+                <div class="review-header">
+                    <div class="review-avatar">MG</div>
+                    <div class="review-meta">
+                        <h4>Maria Gonzalez</h4>
+                        <div class="location">Barcelona, Spain</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★☆</div>
+                <p class="review-text">Solo female traveler, felt completely safe. The 5-minute walk to Pashupatinath at 5 AM was well-lit and the staff always offered to accompany me. Truly caring.</p>
+                <div class="review-room">Stayed in: Standard</div>
+                <div class="review-date">November 2024</div>
+            </div>
+
+            <div class="review-card reveal reveal-delay-2">
+                <div class="review-header">
+                    <div class="review-avatar">RB</div>
+                    <div class="review-meta">
+                        <h4>Rajesh Bhandari</h4>
+                        <div class="location">Birgunj, Nepal</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">We booked the banquet hall for our son's rice-feeding ceremony. 200 guests, flawless service, beautiful decoration. The manager personally oversaw every detail.</p>
+                <div class="review-room">Event: Rice-Feeding Ceremony</div>
+                <div class="review-date">October 2024</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pattern Divider -->
+    <div class="pattern-divider">
+        <div class="line"></div>
+        <div class="ornament">❋</div>
+        <div class="line"></div>
+    </div>
+
+    <!-- OTA Ratings -->
+    <section class="section ota-section">
+        <div class="section-header reveal" style="text-align: center; margin-bottom: var(--space-lg);">
+            <div style="font-family: 'Fraunces', Georgia, serif; font-size: 0.85rem; color: var(--terracotta); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: var(--space-xs);">Also On</div>
+            <h2 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; color: var(--charcoal);">
+                Trusted <span style="font-style: italic; font-weight: 300; color: var(--terracotta);">Platforms</span>
+            </h2>
+        </div>
+        <div class="ota-grid">
+            <div class="ota-card reveal">
+                <div class="logo">TripAdvisor</div>
+                <div class="score">4.5</div>
+                <div class="outof">out of 5</div>
+                <div class="reviews-count">89 reviews</div>
+            </div>
+            <div class="ota-card reveal reveal-delay-1">
+                <div class="logo">Agoda</div>
+                <div class="score">8.8</div>
+                <div class="outof">out of 10</div>
+                <div class="reviews-count">156 reviews</div>
+            </div>
+            <div class="ota-card reveal reveal-delay-2">
+                <div class="logo">Booking.com</div>
+                <div class="score">8.6</div>
+                <div class="outof">out of 10</div>
+                <div class="reviews-count">203 reviews</div>
+            </div>
+            <div class="ota-card reveal reveal-delay-3">
+                <div class="logo">Google</div>
+                <div class="score">4.6</div>
+                <div class="outof">out of 5</div>
+                <div class="reviews-count">312 reviews</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Join the <span class="italic">Voices</span></h2>
+            <p>Experience what 127 guests have already discovered. Cross the threshold into Palagya.</p>
+            <a href="reservation.html" class="btn-primary">
+                <span>Book Your Stay</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-pattern"></div>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">Hotel Palagya</div>
+                <p class="footer-tagline">A sanctuary by the sacred river. Where Nepali hospitality tradition meets modern comfort in the shadow of Pashupatinath.</p>
+                <p class="footer-meaning">Pala + Agya = Palagya — "Obedient" to the guest</p>
+            </div>
+            <div class="footer-column">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="rooms.html">Rooms</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Plan</h4>
+                <ul>
+                    <li><a href="reservation.html">Reservations</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-contact">
+                <h4>Connect</h4>
+                <p>Tilganga, Kathmandu, Nepal</p>
+                <p><a href="tel:+9779851135639">+977-9851135639</a></p>
+                <p><a href="mailto:palagyahotelnepal@gmail.com">palagyahotelnepal@gmail.com</a></p>
+                <p style="margin-top: 1rem; color: var(--gold);">eSewa ID: 9851135639</p>
+                <div class="footer-ota">
+                    <a href="#">Agoda</a>
+                    <a href="#">Expedia</a>
+                    <a href="#">Hotels.com</a>
+                    <a href="#">TripAdvisor</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Hotel Palagya. All rights reserved.</p>
+            <div class="kathmandu-clock">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="kathmanduTime">Kathmandu: --:--</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav
+        const nav = document.getElementById('siteNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+        // Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Animate rating bars on scroll
+        const ratingBars = document.querySelectorAll('.bar-fill');
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => entry.target.style.width = width, 100);
+                    barObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        ratingBars.forEach(bar => barObserver.observe(bar));
+
+        // Clock
+        function updateKathmanduClock() {
+            const now = new Date();
+            const kt = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' }));
+            document.getElementById('kathmanduTime').textContent = `Kathmandu: ${String(kt.getHours()).padStart(2,'0')}:${String(kt.getMinutes()).padStart(2,'0')} NPT`;
+        }
+        updateKathmanduClock(); setInterval(updateKathmanduClock, 1000);
+    </script>
+</body>
+</html>
